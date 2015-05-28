@@ -1,15 +1,20 @@
 import maya.cmds as cmds
 
-def trimKeys(timeRange, multiple):
+def trimKeys(startFrame, endFrame, multiple):
      selected = cmds.ls(sl=True)
+
+     timeRange = endFrame - startFrame
+
      keyframes = []
 
      for i in range(timeRange):
-        keyframes.append(i)
+        frame = i + startFrame
+        keyframes.append(frame)
 
      for i in range(timeRange):
         if i%multiple == 0:
-            keyframes.remove(i)
+            frame = i + startFrame
+            keyframes.remove(frame)
 
      for i in keyframes:
         for s in selected:
